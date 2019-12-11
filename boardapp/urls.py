@@ -1,6 +1,8 @@
 from django.urls import path
+from .views import signupfunc
 
 urlpatterns = [
     # アプリへの繋ぎこみ
-    path('', ),
+    # functionbasedviewで呼び出している
+    path('signup/', signupfunc),
 ]
