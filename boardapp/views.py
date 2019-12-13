@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 
 def signupfunc(request):
+  user2 = User.objects.get(username='user')
+  print(user2.email)
   if request.method == "POST":
     username = request.POST['username']
     password = request.POST['password']
