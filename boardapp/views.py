@@ -2,12 +2,17 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 
 def signupfunc(request):
-  user2 = User.objects.get(username='user')
-  print(user2.email)
   if request.method == "POST":
-    username = request.POST['username']
-    password = request.POST['password']
-    user = User.objects.create_user(username, '', password)
-    return render(request, 'signup.html', {'some':100})
+    username2 = request.POST['username']
+    password2 = request.POST['password']
+    # 例外処理
+    # try: 入力されたユーザー名が既に作られている場合はユーザー登録画面に遷移してエラーメッセージを表示する
+    try:
+        User.objects.get(username=username2)
+        return render(request, 'signup.html', {'error':'このユーザーは既に登録されています'})
+    # except: 入力されたユーザー名が既に作られていない場合はそのままDBに登録される
+    except:
+        user = User.objects.create_user(username2, '', password2)
+        return render(request, 'signup.html', {'some':100})
   # コンテキスト{}でモデルを指定して欲しいデータを持ってくる
   return render(request, 'signup.html', {'some':100})
