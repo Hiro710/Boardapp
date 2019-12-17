@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
+
 
 def signupfunc(request):
   if request.method == "POST":
@@ -16,3 +19,18 @@ def signupfunc(request):
         return render(request, 'signup.html', {'some':100})
   # コンテキスト{}でモデルを指定して欲しいデータを持ってくる
   return render(request, 'signup.html', {'some':100})
+
+def loginfunc(request):
+  if request.method == "POST":
+    username2 = request.POST['username']
+    password2 = request.POST['password']
+    user = authenticate(request, username=username2, password=password2)
+    # ユーザーがいる場合のそのユーザーのログイン処理をする
+    if user is not None:
+      login(request, user)
+      return redirect('signup')
+    else:
+    # ユーザーがいなかった場合の処理(ログインできなかったらログインページに戻る)
+      return redirect('login')
+  # if文のPOSTに当てはまらない時の処理
+  return render(request, 'login.html')
