@@ -35,5 +35,5 @@ def loginfunc(request):
   # if文のPOSTに当てはまらない時の処理
   return render(request, 'login.html')
 
-  def listfunc(request):
-    return render(request, 'list.html')
+def listfunc(request):
+  return render(request, 'list.html')
