@@ -118,8 +118,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# 名前は自由に変更可
+STATIC_URL = '/sta/'
 
+# customcssの設定
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 # 画像(images)の保存先を設定する
 # 今回はBASE_DIRのmediaフォルダに保存する
