@@ -119,3 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# 画像(images)の保存先を設定する
+# 今回はBASE_DIRのmediaフォルダに保存する
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 表示するURL名を設定(自由に変更可)
+MEDIA_URL = '/media/'
