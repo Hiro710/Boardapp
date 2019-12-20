@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .models import BoardModel
 from django.contrib.auth.decorators import login_required
@@ -22,6 +22,7 @@ def signupfunc(request):
   # コンテキスト{}でモデルを指定して欲しいデータを持ってくる
   return render(request, 'signup.html', {'some':100})
 
+# ログイン
 def loginfunc(request):
   if request.method == "POST":
     username2 = request.POST['username']
@@ -45,3 +46,9 @@ def listfunc(request):
   object_list = BoardModel.objects.all()
   # コンテキストでobject_listを使い回す
   return render(request, 'list.html', {'object_list':object_list})
+
+# ログアウト
+def logoutfunc(request):
+    logout(request)
+    # ログアウトしたらログイン画面に遷移させる
+    return redirect('login')
