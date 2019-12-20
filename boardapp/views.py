@@ -30,7 +30,7 @@ def loginfunc(request):
     # ユーザーがいる場合のそのユーザーのログイン処理をする
     if user is not None:
       login(request, user)
-      return redirect('signup')
+      return redirect('list')
     else:
     # ユーザーがいなかった場合の処理(ログインできなかったらログインページに戻る)
       return redirect('login')
