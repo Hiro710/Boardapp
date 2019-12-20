@@ -65,6 +65,23 @@ def goodfunc(request, pk):
   post = BoardModel.objects.get(pk=pk)
   # models.py(BoardModel)のpostオブジェクト内のgoodフィールドを持ってくる
   # post.goodに1を足す
-  post.good = post.good + 1
+  post.good += 1
   post.save()
   return redirect('list')
+
+# 既読機能
+# 個別データに既読するので必ずpkを引数にする
+def readfunc(request, pk):
+  post_user = BoardModel.objects.get(pk=pk)
+  # ログインしているユーザーのユーザー名を持ってくる(まだ既読ボタンを押していないユーザー)
+  no_post_user = request.user.get_username()
+  # post_user内にno_post_user内のユーザー名が入っている場合(ユーザー名が一致した場合)
+  # true listへリダイレクトさせる
+  if no_post_user in post_user.readtext:
+    return redirect('list')
+  else:
+    post_user.read += 1 
+    # ボタンが押されたらpost_userにボタンを押したno_post_userの情報を格納する
+    post_user.readtext = post_user.readtext + ' ' + no_post_user
+    post_user.save()
+    return redirect('list')

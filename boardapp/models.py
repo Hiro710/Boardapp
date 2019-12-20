@@ -7,7 +7,7 @@ from django.db import models
   images 投稿画像
   good いいね
   read 既読
-  readtext 既読ボタンを一人につき1回に制限する
+  readtext 既読ボタンを一人につき1回に制限する(今回は既読ボタンを押したユーザーの名前が入る)
 """
 
 class BoardModel(models.Model):
