@@ -33,7 +33,7 @@ def loginfunc(request):
       login(request, user)
       return redirect('list')
     else:
-    # ユーザーがいなかった場合の処理(ログインできなかったらログインページに戻る)
+      # ユーザーがいなかった場合の処理(ログインできなかったらログインページに戻る)
       return redirect('login')
   # if文のPOSTに当てはまらない時の処理
   return render(request, 'login.html')
@@ -58,3 +58,13 @@ def logoutfunc(request):
 def detailfunc(request, pk):
   object = BoardModel.objects.get(pk=pk)
   return render(request, 'detail.html', {'object':object})
+
+# いいね機能
+# 個別データにいいねするので必ずpkを引数にする
+def goodfunc(request, pk):
+  post = BoardModel.objects.get(pk=pk)
+  # models.py(BoardModel)のpostオブジェクト内のgoodフィールドを持ってくる
+  # post.goodに1を足す
+  post.good = post.good + 1
+  post.save()
+  return redirect('list')

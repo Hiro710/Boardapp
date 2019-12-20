@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signupfunc, loginfunc, listfunc, logoutfunc, detailfunc
+from .views import signupfunc, loginfunc, listfunc, logoutfunc, detailfunc, goodfunc
 
 urlpatterns = [
     # アプリへの繋ぎこみ
@@ -10,4 +10,6 @@ urlpatterns = [
     path('logout/', logoutfunc, name='logout'),
     # 個別投稿は必ず<int:pk>を入れる
     path('detail/<int:pk>', detailfunc, name='detail'),
+    # いいね機能のURL
+    path('good/<int:pk>', goodfunc, name='good'),
 ]
