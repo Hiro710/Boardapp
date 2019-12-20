@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
+from .models import BoardModel
 
 
 def signupfunc(request):
@@ -36,4 +37,7 @@ def loginfunc(request):
   return render(request, 'login.html')
 
 def listfunc(request):
-  return render(request, 'list.html')
+  # objects_listにBoardModel内の全てのデータを格納する
+  object_list = BoardModel.objects.all()
+  # コンテキストでobject_listを使い回す
+  return render(request, 'list.html', {'object_list':object_list})
