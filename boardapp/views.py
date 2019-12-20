@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from .models import BoardModel
+from django.contrib.auth.decorators import login_required
 
 
 def signupfunc(request):
@@ -36,6 +37,9 @@ def loginfunc(request):
   # if文のPOSTに当てはまらない時の処理
   return render(request, 'login.html')
 
+# ログインしているかどうかの処理(前処理、railsのbefore_actionに近いイメージ)
+# 認証で閲覧制限をかけている
+@login_required
 def listfunc(request):
   # objects_listにBoardModel内の全てのデータを格納する
   object_list = BoardModel.objects.all()
