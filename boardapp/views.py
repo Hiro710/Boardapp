@@ -49,6 +49,12 @@ def listfunc(request):
 
 # ログアウト
 def logoutfunc(request):
-    logout(request)
-    # ログアウトしたらログイン画面に遷移させる
-    return redirect('login')
+  logout(request)
+  # ログアウトしたらログイン画面に遷移させる
+  return redirect('login')
+
+# 個別投稿
+# 個別データの指定のため必ずpkを引数にする
+def detailfunc(request, pk):
+  object = BoardModel.objects.get(pk=pk)
+  return render(request, 'detail.html', {'object':object})
