@@ -15,5 +15,5 @@ urlpatterns = [
     # 既読機能のURL
     path('read/<int:pk>', readfunc, name='read'),
     # Classを使ってCreateViewを作成する
-    path('create', BoardCreate.as_view(), name='create'),
+    path('create/', BoardCreate.as_view(), name='create'),
 ]
